@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 
@@ -49,17 +50,18 @@ class Api {
   }) async {
     Map<String, String> headers = {
       'Accept': 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded',
     };
     if (token != null) {
       headers.addAll({'Authorization': 'Bearer $token'});
     }
-    http.Response response = await http.post(
+    log('url : $url , body: $body, token: $token');
+    http.Response response = await http.put(
       Uri.parse(url),
       body: body,
       headers: headers,
     );
     if (response.statusCode == 200) {
+      log(response.body);
       return jsonDecode(response.body);
     } else {
       throw Exception(

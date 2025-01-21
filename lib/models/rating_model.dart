@@ -1,5 +1,5 @@
 class RatingModel {
-  final double rate;
+  final num rate;
   final int count;
 
   RatingModel({
